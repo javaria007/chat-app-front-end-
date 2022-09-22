@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator,navigation} from '@react-navigation/stack';
-import {TouchableOpacity,Text} from 'react-native';
+import {TouchableOpacity,Text,View,Image} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Login from '../screens/Login/Login.screen';
 import Onboarding from '../screens/Onboarding/Onboarding.screen';
@@ -12,6 +12,16 @@ import Icon from '../components/Icon/Icon.component';
 import styles from './styles';
 import Otp from '../screens/Otp/Otp.screen';
 import Phone from '../screens/Phone/Phone.screen';
+import TabBarScreen from './TabNavigator/MainNavigator';
+import MessageListing from '../screens/MessageListing/MessageListing.screen';
+import ExplorePeople from '../screens/ExplorePeople/ExplorePeople.screen';
+import MyProfile from '../screens/MyProfile/MyProfile.screen';
+import EditProfile from '../screens/EditProfile/EditProfile.screen';
+import Chat from '../screens/Chat/Chat.screen';
+import PrivacyPolicy from '../screens/PrivacyPolicy/PrivacyPolicy.screen';
+import AboutUs from '../screens/AboutUs/AboutUs.screen';
+import Conditions from '../screens/Conditions/Conditions.screen';
+
 const Stack = createStackNavigator();
 export default function Routes({navigation,props}) {
   const isLogin = useSelector(state => state.Auth.isLogin);
@@ -66,7 +76,7 @@ export default function Routes({navigation,props}) {
               backgroundColor: Colors.white,
               elevation: 0,
               
-              borderBottomWidth:1,
+             // borderBottomWidth:1,
               borderBottomLeftRadius: height(2),
               borderBottomRightRadius: height(2),
 
@@ -90,14 +100,27 @@ export default function Routes({navigation,props}) {
          
         </Stack.Navigator>
       ) : (
-        <Stack.Navigator initialRouteName="Home" screenOptions={{
+        <Stack.Navigator initialRouteName="Explore" screenOptions={{
           headerShown: true,
           title: '',
             
             headerBackImage: (tintColor) =>
               (<Icon category="Ionicons" name="ios-arrow-back" size={24} style={{ padding: '2%', marginLeft: '2%' }} color={Colors.white} />),
           headerStyle: {
-            backgroundColor: Colors.bluePrimary,
+            height: height(12),
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 2.84,
+            backgroundColor: Colors.white,
+            elevation: 0,
+
+            //borderBottomWidth: 1,
+            borderBottomLeftRadius: height(2),
+            borderBottomRightRadius: height(2),
             
           },
           separator:{
@@ -117,7 +140,46 @@ export default function Routes({navigation,props}) {
            
           },
         }}>
-            <Stack.Screen name="Home" component={Home} options={{headerShown:false}}  />
+            <Stack.Screen name="TabBarScreen" component={TabBarScreen} options={{
+              headerShown:false,
+              headerLeft: () => (
+                <View>
+                 
+                  <Text style={styles.header}>{'Welcome,'}</Text>
+                  <Text style={styles.userName}>{'Username'}</Text>
+                </View>
+              ),
+              headerRight: () => (
+                <TouchableOpacity>
+                  <Image source={require('../Assets/profilePicture.jpeg')} style={styles.headerRight} />
+                </TouchableOpacity>
+              ),
+              
+            }} />
+            <Stack.Screen name="ExplorePeople" component={ExplorePeople} options={{
+              headerShown:true,
+            }} />
+            <Stack.Screen name="MyProfile" component={MyProfile} options={{
+              headerShown: false,
+            }} />
+            <Stack.Screen name="EditProfile" component={EditProfile} options={{
+              headerShown: true,
+            }} />
+            <Stack.Screen name="Chat" component={Chat} options={{
+              headerShown: true,
+            }} />
+            <Stack.Screen name="AboutUs" component={AboutUs} options={{
+              headerShown: true,
+            }} />
+            <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} options={{
+              headerShown: true,
+            }} />
+            <Stack.Screen name="Conditions" component={Conditions} options={{
+              headerShown: true,
+            }} />
+          
+
+           
             
            
           

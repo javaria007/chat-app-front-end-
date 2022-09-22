@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
         marginTop: height(1),
         alignItems: 'center',
         width: width(100),
-        height: height(20)
+        height: height(20),
+        alignSelf: 'center',
     },
     logoImage: {
 
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
         fontSize: 27,
         color: Colors.bluePrimary,
         fontFamily: 'Segoe UI',
-        fontWeight: '500',
+        fontWeight: '400',
         marginTop: height(5),
     },
     enterCode: {

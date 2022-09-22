@@ -5,5 +5,7 @@ const Colors = {
   screenOnboard:'#F6F8FA',
   gray:'#707070',
   black:'#000',
+  user: '#262626',
+  backgroundColor: '#F8F8F8',
 };
 export default Colors;

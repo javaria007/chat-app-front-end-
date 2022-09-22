@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 
   },
   text: {
-    fontSize:20,
+    fontSize:18,
     color: Colors.white,
    fontFamily:'Segoe UI',
     fontWeight: '300',

@@ -1,4 +1,4 @@
-import {LOGIN, LOGOUT, SETDARK, SETLIGHT} from '../Types';
+import { LOGIN, LOGOUT, SETDARK, SETLIGHT, SELECTEDTYPE } from '../Types';
 export const login = payload => {
   return {
     type: LOGIN,
@@ -9,6 +9,12 @@ export const logout = () => {
   return {
     type: LOGOUT,
     payload: {uid: ''},
+  };
+};
+export const selected = payload => {
+  return {
+    type: SELECTEDTYPE,
+    payload: payload,
   };
 };
 export const setDark = payload => {

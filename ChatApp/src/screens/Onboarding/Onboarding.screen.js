@@ -4,6 +4,7 @@ import styles from './Onboarding.styles';
 import Button from '../../components/Button/Button.component';
 import Login from '../Login/Login.screen';
 import Container from '../../components/Container/Container.component';
+import FastImage from 'react-native-fast-image';
 import Otp from '../Otp/Otp.screen';
 import Phone from '../Phone/Phone.screen';
 export default function Onboarding(props) {
@@ -29,7 +30,7 @@ props.navigation.navigate('Otp')
     return (
         <Container style={styles.container}>
             <View style={styles.imageContainer}>
-                <Image source={require('../../Assets/Onboarding/chatbackground.png')} resizeMode="cover" style={styles.imageContainer}/>
+                <FastImage source={require('../../Assets/Onboarding/chatBackground.png')} resizeMode={FastImage.resizeMode.cover} style={{width:'100%',aspectRatio:1}}/>
             </View>
             <View style={styles.card}>
                 <Text style={styles.title}>{'Make a friend, Expand your connections'}</Text>

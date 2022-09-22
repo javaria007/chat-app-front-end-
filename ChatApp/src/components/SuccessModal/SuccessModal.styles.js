@@ -35,7 +35,7 @@ marginTop:height(5),
          justifyContent: 'center',
           alignItems: 'center',
            
-           width:width(40),
+           width:width(50),
            marginTop: height(1),
 
     },

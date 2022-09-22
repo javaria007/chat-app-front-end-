@@ -27,7 +27,7 @@ export default function Login(props) {
         const [age, setAge] = useState('');
         const [gender,setGender]=useState('Select');
         const [phone,setPhone]=useState('');
-        const [bio,setBio]=useState('');
+        const [bio,setBio]=useState('Enter your status');
         const [uri,setUri]=useState();
         const [count,setCount]=useState(0);
         const [checked,setChecked]=useState(false);
@@ -36,6 +36,8 @@ export default function Login(props) {
     const [ageFocused, setAgeFocused] = useState(false);
     const [bioFocused, setBioFocused] = useState(false);
         const data=['Hide Profile','Public Profile'];
+    const [otherVisible, setOtherVisible] = useState(false);
+    const about = ['Busy right now', 'Urgent calls only', 'Text only', 'Other']
     useEffect(() => {
         props.navigation.setOptions({
 
@@ -54,7 +56,7 @@ export default function Login(props) {
             <Text style={styles.inputLabel}>Gender</Text>
                 <TouchableOpacity style={styles.genderContainer} onPress={() => refPicker.current.open()}>
                 <Text style={styles.dropdownText}>{gender}</Text>
-                  <Icon name="chevron-down" category="FontAwesome" size={15} color={Colors.gray}/>
+                  <Icon name="chevron-down" category="Ionicons" size={15} color={Colors.gray}/>
             </TouchableOpacity>
             </>
         )
@@ -98,11 +100,74 @@ export default function Login(props) {
             </RBSheet>
         )
     }
+    const SelectAbout = () => {
+        return (
+            <>
+                <Text style={styles.inputLabel}>Status</Text>
+                <TouchableOpacity style={styles.genderContainer} onPress={() => bioRef.current.open()}>
+                    <Text style={styles.dropdownText}>{bio}</Text>
+                    <Icon name="chevron-down" category="Ionicons" size={15} color={Colors.gray} />
+                </TouchableOpacity>
+            </>
+        )
+    }
+    const AboutPicker = () => {
+        return (
+            <RBSheet
+                ref={bioRef}
+                closeOnDragDown={true}
+                closeOnPressMask={false}
+                // height={200}
+
+                customStyles={{
+                    draggableIcon: {
+                        backgroundColor: "#000"
+                    },
+                    container: {
+                        borderRadius: 20,
+
+                    }
+                }}
+
+            >
+                <ScrollView style={styles.scrollView}>
+                    <View style={styles.bottomSheetTitleContainer}>
+                        <Text style={styles.bottomSheetTitle}>Select</Text>
+                        <TouchableOpacity style={{ padding: '2%' }} onPress={() => bioRef.current.close()}>
+                            <Icon name="cross" category='Entypo' size={22} color={Colors.gray} />
+                        </TouchableOpacity>
+                    </View>
+                    {about.map((item, key) => {
+                        return (
+                            <>
+                                <TouchableOpacity style={styles.renderContainer} onPress={() => {
+
+                                    if (item == 'Other') {
+                                        setOtherVisible(true);
+                                        setBio('')
+                                    }
+                                    else
+                                        setBio(item);
+                                }}>
+                                    <Text style={styles.bottomSheetText}>{item}</Text>
+                                </TouchableOpacity>
+                                <Divider style={styles.divider} />
+                            </>
+                        )
+                    })
+
+
+                    }
+                </ScrollView>
+            </RBSheet>
+        )
+    }
     const CreateButton = () => {
        
           const  onPress =()=>{
-             //dispatch(login({ userName: 'John Doe' }))
+             
              setVisible(true);
+             
 }
         
         return (
@@ -184,7 +249,9 @@ export default function Login(props) {
                     return (<View style={styles.hideContainer}>
                         {
                             checked==key ?
-                                <TouchableOpacity style={styles.checked} onPress={() => { setChecked(!checked); setValue('Hide') }}></TouchableOpacity>
+                                <TouchableOpacity style={styles.checked} onPress={() => { setChecked(!checked); setValue('Hide') }}>
+                                    <Icon name="check" category="FontAwesome5" size={15} color={Colors.white} />
+                                </TouchableOpacity>
                                 :
                                 <TouchableOpacity style={styles.notChecked} onPress={() => setChecked(!checked)}></TouchableOpacity>
                         }
@@ -262,27 +329,34 @@ export default function Login(props) {
                     }}
                 />
                 <SelectGender/>
-                <View style={styles.bioContainer}>
-                <Text style={styles.inputLabel}>Bio</Text>
-                <Text style={styles.count}>{count}{'/200'}</Text>
-                </View>
-                <TextField
-                    style={[styles.bio, bioFocused && styles.focusColor]}
-                    value={bio}
-                    onFocus={() => setBioFocused(true)}
-                    onBlur={() => setBioFocused(false)}
-                    onTextChange={(value)=>{setBio(value);
-                    setCount(value.length)}}
-                    placeholder={"Enter Bio"}
-                    placeholderTextColor={Colors.gray}
-                    returnKeyType="done"
-                    multiline={true}
-                    numberOfLines={6}
-                    onSubmitEditing={() => {
-                        Keyboard.dismiss();
-                    }}
-                    maxLength={200}
-                />
+                    {otherVisible ?
+                        <>
+                            <View style={styles.bioContainer}>
+                                <Text style={styles.inputLabel}>Status</Text>
+                                <Text style={styles.count}>{count}{'/50'}</Text>
+                            </View>
+                            <TextField
+                                style={bioFocused && styles.focusColor}
+                                value={bio}
+                                onFocus={() => setBioFocused(true)}
+                                onBlur={() => { setBioFocused(false); setOtherVisible(false) }}
+                                onTextChange={(value) => {
+                                    setBio(value);
+                                    setCount(value.length)
+                                }}
+                                placeholder={"Enter your status"}
+                                placeholderTextColor={Colors.gray}
+                                autoFocus={true}
+                                returnKeyType="done"
+
+
+                                onSubmitEditing={() => {
+                                    Keyboard.dismiss();
+                                }}
+                                maxLength={50}
+                            />
+                        </>
+                        : <SelectAbout />}
                 <CheckBoxView/>
                 <CreateButton/>
             
@@ -293,7 +367,8 @@ export default function Login(props) {
             <SuccessModal
                     description={'Your account has been created successfully'}
                     isVisible={visible}
-                    onPress={()=>setVisible(false)}/>
+                    onPress={() => { setVisible(false); dispatch(login({ userName: 'John Doe' }))}}/>
+                <AboutPicker />
             </Container>
         </ScrollView>
     )

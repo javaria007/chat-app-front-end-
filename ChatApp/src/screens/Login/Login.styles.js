@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 
   },
   componentContainer:{
-    marginTop:height(5),
+    marginTop:height(3),
   },
   inputLabel:{
     fontSize:16,
@@ -120,6 +120,8 @@ flexDirection: 'row',
     height: 20,
     backgroundColor: Colors.bluePrimary,
     borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   notChecked: {
     width: 20,

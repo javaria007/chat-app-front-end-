@@ -6,6 +6,8 @@ import Icon from '../../components/Icon/Icon.component';
 import Colors from '../../utills/Colors';
 import TextField from '../../components/TextField/TextField.component';
 import Login from '../../screens/Login/Login.screen';
+import SuccessModal from '../../components/SuccessModal/SuccessModal.component';
+import FastImage from 'react-native-fast-image';
 import {
     CodeField,
     Cursor,
@@ -17,6 +19,7 @@ import Container from '../../components/Container/Container.component';
 
 export default function Otp(props) {
     const [value, setValue] = useState('');
+    const [visible, setVisible]=useState(false);
     const ref = useBlurOnFulfill({ value, cellCount: 4 });
     const [prop, getCellOnLayoutHandler] = useClearByFocusCell({
         value,
@@ -24,7 +27,7 @@ export default function Otp(props) {
     });
     const VerifyButton = () => {
         const onPress = () => {
-            props.navigation.navigate('Login');
+          setVisible(true);
         }
         return (
             <Button title="Verify" style={styles.verifyButton} onPress={onPress} />
@@ -42,10 +45,10 @@ export default function Otp(props) {
     }
 
     return (
-        <Container style={styles.container}>
+        <View style={styles.container}>
 
             <View style={styles.logoImageContainer}>
-                <Image source={require('../../Assets/Otp/otp.png')} resizeMode="contain" style={styles.logoImage} />
+                <FastImage source={require('../../Assets/Otp/otp.png')} resizeMode={FastImage.resizeMode.contain} style={styles.logoImage} />
             </View>
             <Text style={styles.VerificationTitle}>{'Verification'}</Text>
             <Text style={styles.enterCode}>{'Enter code that you received on phone'}</Text>
@@ -55,6 +58,7 @@ export default function Otp(props) {
                 {...prop}
 
                 value={value}
+                
                 onChangeText={setValue}
 
                 cellCount={4}
@@ -66,7 +70,7 @@ export default function Otp(props) {
                     <View style={[styles.cellBorder, isFocused && styles.focusCell]}
                         onLayout={getCellOnLayoutHandler(index)}>
                         <Text style={styles.cell} key={index}>
-                            {symbol || (isFocused ? <Cursor /> : null)}
+                            {symbol || (isFocused ? <Cursor /> : 0)}
                         </Text>
 
                     </View>
@@ -76,9 +80,15 @@ export default function Otp(props) {
 
             </View>
             <VerifyButton />
+<SuccessModal
+                description={'Your phone number has been verified Successfully'}
+                isVisible={visible}
+                onPress={() => {
+                    setVisible(false);
+                   props.navigation.navigate('Login')}}
+/>
 
 
-
-        </Container>
+        </View>
     )
 }

@@ -14,6 +14,15 @@ const styles = StyleSheet.create({
     bottom: 0,
     zIndex: 0,
   },
+  floatingButton:{
+width:32,
+height:32,
+borderRadius:32/2,
+backgroundColor:color.gray,
+alignItems: 'center',
+justifyContent: 'center',
+marginTop:height(1),
+  },
   tabBar1: {
     width: width(100),
     height: height(9),

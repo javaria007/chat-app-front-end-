@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
 
     fontSize: 16,
     fontWeight: '400',
+    fontFamily: 'Segoe UI',
     color: Colors.gray,
     paddingHorizontal: height(1.5),
     marginTop: height(0.2)
@@ -23,7 +24,8 @@ const styles = StyleSheet.create({
   },
   bottomSheetTitle: {
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: '400',
+    fontFamily: 'Segoe UI',
     color: Colors.gray,
   },
   divider: {

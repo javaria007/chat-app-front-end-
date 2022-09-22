@@ -6,12 +6,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         
-        backgroundColor:Colors.white,
+        backgroundColor:Colors.backgroundColor,
     },
     imageContainer:{
-        marginTop:height(2),
+       
         width:width(100),
-        height:height(50)
+       
+      
     },
     card:{
         flex:1,
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     title:{
         fontSize:27,
         fontFamily:'Segoe UI',
-        fontWeight: '500',
+        fontWeight: '400',
         color: Colors.white,
         textAlign:'center',
 marginTop: height(2),

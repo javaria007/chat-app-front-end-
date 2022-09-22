@@ -1,4 +1,4 @@
-import {LOGIN, LOGOUT, SETDARK, SETLIGHT} from '../Types';
+import {LOGIN, LOGOUT, SETDARK, SETLIGHT,SELECTEDTYPE} from '../Types';
 const intialState = {
   user: {},
   isLogin: false,
@@ -33,6 +33,11 @@ const reducer = (state = intialState, action) => {
         user: {},
         theme: 'light',
       };
+    }
+    case SELECTEDTYPE: {
+     return{ ...state,
+path: action.payload
+     };
     }
     default:
       return state;

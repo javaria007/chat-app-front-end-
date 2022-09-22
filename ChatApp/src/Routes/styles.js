@@ -13,7 +13,22 @@ export default StyleSheet.create(
            fontWeight: '400',
            marginLeft: height(2),
            color: ThemeColors.bluePrimary,
-           paddingVertical: '2%'
-       }
+          
+       },
+       userName:{
+           fontFamily: 'Segoe UI',
+           fontSize: 16,
+          color:ThemeColors.gray,
+           marginLeft: height(2),
+       },
+        headerRight: {
+            width: 45,
+            height: 45,
+            borderRadius: 45/2,
+            marginRight: height(2),
+            backgroundColor: ThemeColors.gray,
+            resizeMode: 'cover'
+
+        },
     }
 );
