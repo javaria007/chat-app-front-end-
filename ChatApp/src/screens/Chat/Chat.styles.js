@@ -11,14 +11,24 @@ export default StyleSheet.create({
     giftedScreen: {
         flex: 1,
         backgroundColor: Colors.backgroundColor,
-        paddingHorizontal:'5%',
+        paddingHorizontal:'1%',
 
     },
-    
+    toolbarTip:{
+        borderTopWidth: 0, paddingVertical: '3%', shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 2.84,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10
+    },
     sendButton: {
         padding:'2%',
         backgroundColor: Colors.white,
-        marginHorizontal: hp(1),
+        marginRight: hp(1),
         width:50,
         aspectRatio: 1,
         borderRadius:50/2,
@@ -171,7 +181,8 @@ flexDirection: 'row',
         justifyContent:'space-between',
         paddingLeft: hp(1),
         borderColor:Colors.gray,
-        marginTop: hp(1),
+        marginHorizontal:'2%',
+        marginVertical: hp(1),
         borderWidth:0.5,
         height:55,
 

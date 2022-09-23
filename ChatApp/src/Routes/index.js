@@ -41,6 +41,7 @@ export default function Routes({navigation,props}) {
               elevation: 0,
               shadowOpacity: 0,
               borderBottomWidth: 0,
+              shadowColor:'#000',
 
             },
             headerBackTitleStyle: {

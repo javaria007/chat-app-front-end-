@@ -24,6 +24,8 @@ target 'ChatApp' do
 pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
  
 
+  pod 'VisionCamera', :path => '../node_modules/react-native-vision-camera'
+
   target 'ChatAppTests' do
     inherit! :complete
     # Pods for testing

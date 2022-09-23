@@ -16,6 +16,7 @@ import { Camera, useCameraDevices } from 'react-native-vision-camera';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MyProfile from '../MyProfile/MyProfile.screen';
 import { useSelector } from 'react-redux';
+import styles from '../../Routes/styles';
 const Chat = (props) => {
     const insets = useSafeAreaInsets();
     const camera = createRef()
@@ -394,7 +395,13 @@ const Header=()=>{
                 placeholder={'Type Something'}
                 messagesContainerStyle={{ paddingBottom: '5%' }}
                 alwaysShowSend={true}
-
+                            renderInputToolbar={(props) => (
+                                <InputToolbar {...props} containerStyle={style.toolbarTip
+            }
+                                     />
+                            )}
+                        
+                        
                 renderBubble={renderBubble}
                 showUserAvatar={false}
                 multiline={true}
