@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator,navigation} from '@react-navigation/stack';
-import {TouchableOpacity,Text,View,Image} from 'react-native';
+import {TouchableOpacity,Text,View,Image,useState,useEffect} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Login from '../screens/Login/Login.screen';
 import Onboarding from '../screens/Onboarding/Onboarding.screen';
@@ -21,13 +21,22 @@ import Chat from '../screens/Chat/Chat.screen';
 import PrivacyPolicy from '../screens/PrivacyPolicy/PrivacyPolicy.screen';
 import AboutUs from '../screens/AboutUs/AboutUs.screen';
 import Conditions from '../screens/Conditions/Conditions.screen';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 export default function Routes({navigation,props}) {
+  let checkLog=null;
+    AsyncStorage.getItem('logged').then(result => {
+   
+     checkLog=result;
+      console.log('Async Storages', checkLog)
+    })
+  
+   
   const isLogin = useSelector(state => state.Auth.isLogin);
   return (
     <NavigationContainer>
-      {!isLogin ? (
+      {!isLogin && checkLog!="Yes"? (
         <Stack.Navigator initialRouteName="Onboarding" 
           screenOptions={{
             headerShown: true,
@@ -141,6 +150,7 @@ export default function Routes({navigation,props}) {
            
           },
         }}>
+          
             <Stack.Screen name="TabBarScreen" component={TabBarScreen} options={{
               headerShown:false,
               headerLeft: () => (
@@ -157,9 +167,7 @@ export default function Routes({navigation,props}) {
               ),
               
             }} />
-            <Stack.Screen name="ExplorePeople" component={ExplorePeople} options={{
-              headerShown:true,
-            }} />
+           
             <Stack.Screen name="MyProfile" component={MyProfile} options={{
               headerShown: false,
             }} />
@@ -178,6 +186,10 @@ export default function Routes({navigation,props}) {
             <Stack.Screen name="Conditions" component={Conditions} options={{
               headerShown: true,
             }} />
+            <Stack.Screen name="ExplorePeople" component={ExplorePeople} options={{
+              headerShown: true,
+            }} />
+           
           
 
            

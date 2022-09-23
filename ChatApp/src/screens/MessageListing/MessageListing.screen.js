@@ -13,8 +13,6 @@ import Icon from '../../components/Icon/Icon.component';
 import data from './data';
 import Chat from '../Chat/Chat.screen';
 
-
-
 export default function (props) {
     const rendItem = ({ item }) => {
         console.log('item', item);

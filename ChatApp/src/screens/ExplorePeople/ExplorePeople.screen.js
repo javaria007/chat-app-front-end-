@@ -7,6 +7,7 @@ import {Card} from 'react-native-paper';
 import Data from './data';
 import Chat from '../../screens/Chat/CameraScreen.screen';
 import MyProfile from '../MyProfile/MyProfile.screen';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function ExplorePeople(props) {
     const [search,setSearchText]=useState('');
     const [data,setData]=useState(Data)
@@ -49,6 +50,11 @@ export default function ExplorePeople(props) {
     const rendItem = ({ item }) => {
         console.log('item', item);
         const onPress = () => {
+            AsyncStorage.setItem('logged',"Yes").then(value => {
+
+            }).catch(error => {
+                console.log(error);
+            });
             props.navigation.navigate('MyProfile', {
                 item: item,
                 newUser:true,

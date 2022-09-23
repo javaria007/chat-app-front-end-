@@ -189,7 +189,7 @@ const Header=()=>{
                 <TouchableOpacity style={style.backIcon}  onPress={() => props.navigation.pop()}>
                 <Icon category="Ionicons" name="ios-arrow-back" size={24}  color={Colors.bluePrimary} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() =>props.navigation.navigate('MyProfile',{other:true})}>
+                <TouchableOpacity >
                 <View style={style.profileImageView}>
                     <FastImage
                         source={user.image}
@@ -393,7 +393,7 @@ const Header=()=>{
                 }}
                 renderAvatar={() => null}
                 placeholder={'Type Something'}
-                messagesContainerStyle={{ paddingBottom: '5%' }}
+                messagesContainerStyle={{ paddingBottom: '12%' }}
                 alwaysShowSend={true}
                             renderInputToolbar={(props) => (
                                 <InputToolbar {...props} containerStyle={style.toolbarTip

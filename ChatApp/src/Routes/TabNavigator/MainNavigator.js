@@ -2,7 +2,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from "react";
 import { useNavigation } from '@react-navigation/native';
-import { Image,View,Text,TouchableOpacity } from 'react-native';
+import { createStackNavigator, navigation } from '@react-navigation/stack';
+import { Image,View,Text,TouchableOpacity,useState } from 'react-native';
 import Icon from "../../components/Icon/Icon.component";
 import Colors from '../../utills/Colors'
 import MessageListing from '../../screens/MessageListing/MessageListing.screen';
@@ -13,11 +14,31 @@ import style from './Tab.styles';
 import ExplorePeople from '../../screens/ExplorePeople/ExplorePeople.screen';
 import MyProfile from '../../screens/MyProfile/MyProfile.screen';
 import {heightPercentageToDP as height,widthPercentageToDP as width} from 'react-native-responsive-screen';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const tab = createBottomTabNavigator();
 
+
+
+
+
 export default ({props}) => {
+  let checkLog = null;
+  AsyncStorage.getItem('logged').then(result => {
+
+    checkLog = result;
+    console.log('Async Storages', checkLog)
+  })
 const navigation=useNavigation();
+const Stack = createStackNavigator();
+const ExploreNav=()=>{
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name="Explore" component={Explore}/>
+      <Stack.Screen name="ExplorePeople" component={ExplorePeople}/>
+    </Stack.Navigator>
+  )
+}
+
   return (
     <tab.Navigator initialRouteName="Explore" screenOptions={{
       headerShown: true,
@@ -79,17 +100,27 @@ const navigation=useNavigation();
           tabBarIcon: (props) => <Icon name='chatbubbles' category='Ionicons' size={ 24} color={ props.color } />
         }}
       />
-      <tab.Screen
-        name={"Explore"}
-        component={Explore}
-        options={{
-          headerShown: true,
-          tabBarIcon: (tintColor, focused) => {return(
-            <TouchableOpacity style={[style.floatingButton ,focused && {backgroundColor:Colors.bluePrimary}]} onPress={()=>navigation.navigate('ExplorePeople')}>
-          <Icon name='search' category='Ionicons' size={ 24} color={"#fff"} />
-            </TouchableOpacity>
-  )} }}
-      />
+
+        <tab.Screen
+          name={"Explore"}
+          component={Explore}
+          options={{
+            headerShown: true,
+            headerRight: () => (
+              <>
+              </>
+
+            ),
+            tabBarIcon: (props) => {
+              console.log('hell',props)
+              return (
+                <TouchableOpacity style={[style.floatingButton,props.focused &&  style.activeFloatingButton]} onPress={() => navigation.navigate('ExplorePeople')}>
+                  <Icon name='search' category='Ionicons' size={24} color={"#fff"} />
+                </TouchableOpacity>
+              )
+            }
+          }}
+        /> 
       <tab.Screen
         name={"Settings"}
         component={Settings}
